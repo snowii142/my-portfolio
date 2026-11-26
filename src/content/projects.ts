@@ -17,7 +17,11 @@ export type Project = {
   context: string;
   highlights: string[];
   stack: string[];
-  media: { cover: Slot; shots: Slot[] };
+  media: {
+    cover: Slot;
+    shots: Slot[];
+    device?: boolean;
+  };
 };
 
 export function coverPath(slug: string) {
@@ -328,6 +332,7 @@ export const projects: Project[] = [
   {
     slug: 'condominium-launch-website',
     product: 'Seven 9 Eight',
+    url: 'https://fullweb.seven9eight.com',
     title: 'Condominium Launch Website',
     domain: 'Real estate marketing',
     years: '2025 - 2026',
@@ -401,6 +406,7 @@ export const projects: Project[] = [
       'i18next',
     ],
     media: {
+      device: true,
       cover: {
         alt: 'Portrait kiosk screen showing the ground-floor mall map with a you-are-here marker, a floor switcher and directory shortcuts',
         caption:

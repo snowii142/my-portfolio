@@ -20,7 +20,7 @@ export const profile = {
   summary:
     '4+ years shipping client systems in energy, automotive, real estate and retail. React, Next.js and TypeScript on the front, NestJS and Go when a feature needs the backend too.',
   availability: 'Open to frontend and full-stack roles',
-  portraitPath: '/me/me.png',
+  portraitPath: '/me/me.webp',
 };
 
 export type Experience = {

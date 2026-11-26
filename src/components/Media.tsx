@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react';
 import Image from 'next/image';
 import { publicImageSize } from '@/lib/media';
 import { ImageIcon } from '@/components/ui';
@@ -15,6 +16,8 @@ export function MediaFrame({
   position = 'object-center',
   fit = 'cover',
   parallax = false,
+  scroll = false,
+  device = false,
   className = '',
 }: {
   src: string;
@@ -26,6 +29,8 @@ export function MediaFrame({
   position?: string;
   fit?: 'cover' | 'contain';
   parallax?: boolean;
+  scroll?: boolean;
+  device?: boolean;
   className?: string;
 }) {
   const size = publicImageSize(src);
@@ -45,9 +50,34 @@ export function MediaFrame({
     );
   }
 
-  // Portrait screens (kiosks, phones) would be cropped to a sliver or stretch
-  // the page in a landscape frame: show them whole, centred on a stage.
-  if (size.height > size.width) {
+  if (scroll && ratio && !(device && size.height > size.width)) {
+    const [, fw, fh] = ratio.match(/(\d+(?:\.\d+)?)\/(\d+(?:\.\d+)?)/) ?? [];
+    const frameHW = fw && fh ? Number(fh) / Number(fw) : 10 / 16;
+    const overflow = size.height / size.width / frameHW - 1;
+    const pans = overflow > 0.04;
+    const seconds = Math.min(9, Math.max(1.4, 1.2 + overflow * 2.2));
+    return (
+      <div
+        className={`group/media ${frame} ${ratio}`}
+        style={{ '--pan': `${seconds.toFixed(2)}s` } as CSSProperties}
+      >
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          sizes={sizes}
+          priority={priority}
+          className={`object-cover object-top dark:brightness-[0.88] ${
+            pans
+              ? 'transition-[object-position] duration-700 ease-in-out group-hover:object-bottom group-hover:duration-(--pan) group-focus-visible:object-bottom group-focus-visible:duration-(--pan) group-hover/media:object-bottom group-hover/media:duration-(--pan) motion-reduce:transition-none'
+              : ''
+          }`}
+        />
+      </div>
+    );
+  }
+
+  if (device && size.height > size.width) {
     return (
       <div
         className={`${frame} ${ratio ?? 'aspect-16/10'} grid place-items-center`}

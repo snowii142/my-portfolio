@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import { coverPath, otherWork, projects, thumbPath } from '@/content/projects';
-import { publicImageSize } from '@/lib/media';
+import { coverPath, otherWork, projects } from '@/content/projects';
 import { t } from '@/i18n/ui';
 import { MediaFrame } from '@/components/Media';
 import { RevealGroup, RevealItem } from '@/components/motion';
@@ -28,17 +27,14 @@ export function Work() {
                 className="group flex h-full flex-col rounded-3xl bg-surface p-3 shadow-card ring-1 ring-line transition-[transform,box-shadow] duration-500 ease-out-expo hover:-translate-y-1 hover:shadow-lift"
               >
                 <MediaFrame
-                  src={
-                    publicImageSize(thumbPath(project.slug))
-                      ? thumbPath(project.slug)
-                      : coverPath(project.slug)
-                  }
+                  src={coverPath(project.slug)}
                   alt={project.media.cover.alt}
                   pendingLabel={t.image.pending}
                   ratio="aspect-[16/10]"
                   sizes="(min-width: 768px) 540px, 92vw"
                   priority={index < 2}
-                  parallax
+                  scroll
+                  device={project.media.device}
                   className="rounded-[18px]"
                 />
                 <div className="flex flex-1 flex-col gap-2 px-3 pt-5 pb-3">

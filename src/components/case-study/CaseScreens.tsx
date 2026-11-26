@@ -42,7 +42,8 @@ export function CaseScreens({ project }: { project: Project }) {
                 alt={image.alt}
                 pendingLabel={t.image.pending}
                 ratio="aspect-[16/10]"
-                parallax
+                scroll
+                device={project.media.device}
                 sizes="(min-width: 768px) 540px, 94vw"
                 className="shadow-card"
               />
@@ -60,6 +61,7 @@ export function CaseScreens({ project }: { project: Project }) {
                         alt=""
                         pendingLabel=""
                         ratio="aspect-[16/10]"
+                        device={project.media.device}
                         sizes="80px"
                         className="rounded-lg"
                       />

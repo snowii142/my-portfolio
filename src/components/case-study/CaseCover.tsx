@@ -12,6 +12,7 @@ export function CaseCover({ project }: { project: Project }) {
           <RevealItem as="figure" variant="scale">
             <MediaFrame
               src={coverPath(project.slug)}
+              device={project.media.device}
               alt={project.media.cover.alt}
               pendingLabel={t.image.pending}
               sizes="(min-width: 1280px) 1216px, 94vw"

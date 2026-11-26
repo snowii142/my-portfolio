@@ -24,6 +24,10 @@ export function Contact() {
           </RevealItem>
           <RevealItem>
             <p className="mt-6 inline-flex font-bold items-center gap-2 rounded-full bg-surface px-3.5 py-1.5 text-sm shadow-pill">
+              <span className="relative flex size-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex size-2 rounded-full bg-green-500"></span>
+              </span>
               {t.contact.status}
             </p>
           </RevealItem>

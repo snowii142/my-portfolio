@@ -31,6 +31,9 @@ export function NextProject({ project }: { project: Project }) {
             src={coverPath(project.slug)}
             alt={project.media.cover.alt}
             pendingLabel={t.image.pending}
+            ratio="aspect-[16/10]"
+            scroll
+            device={project.media.device}
             sizes="(min-width: 768px) 600px, 94vw"
             className="rounded-[18px]"
           />
