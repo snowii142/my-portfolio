@@ -17,6 +17,11 @@ pnpm build      # static site in out/
 
 ## Before deploying
 
+- Build with the live address so link previews get absolute image URLs:
+  `SITE_URL=https://your-domain pnpm build`. Share images are drawn at build
+  time (`src/lib/og/render.tsx`) and `scripts/og-png.mjs` gives them a `.png`
+  extension.
+
 - Put the CV at `public/pongsakorn-sornpetch-cv.pdf` (path set in `profile.cvPath`).
 - Screenshots live in `public/work/`. Keep client logos and names out of them.
 
