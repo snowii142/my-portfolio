@@ -30,7 +30,7 @@ export const t = {
     title: 'Experience',
     education: 'Education',
     educationText:
-      'High Vocational Certificate, Eastern Technological College, 2019 to 2021, GPA 3.83',
+      'High Vocational Certificate in Information Technology, Eastern Technological College, 2019 to 2021, GPA 3.83',
     languages: 'Languages',
     languagesText: 'Thai (native), English (intermediate)',
   },
