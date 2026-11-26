@@ -1,26 +1,222 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #f3f3f2;
+  --bg-glow: #fbfbfa;
+  --surface: #fbfbfa;
+  --surface-2: #ececeb;
+  --ink: #111111;
+  --ink-soft: #33332f;
+  --muted: #64645f;
+  --faint: #8a8a85;
+  --line: #e0e0dd;
+  --line-strong: #cbcbc7;
+  --invert: #161616;
+  --invert-ink: #f6f6f5;
+  --live: #22b14c;
+  --pill-shadow: 0 1px 1px rgb(0 0 0 / 0.04), 0 4px 10px -2px rgb(0 0 0 / 0.1),
+    inset 0 1px 0 rgb(255 255 255 / 0.9);
+  --card-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 18px 40px -16px rgb(0 0 0 / 0.16);
+  --lift-shadow: 0 2px 4px rgb(0 0 0 / 0.05), 0 28px 56px -18px rgb(0 0 0 / 0.24);
+  color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+:root[data-theme="dark"] {
+  --bg: #0b0b0b;
+  --bg-glow: #262626;
+  --surface: #151515;
+  --surface-2: #1d1d1d;
+  --ink: #f2f2f0;
+  --ink-soft: #d0d0cc;
+  --muted: #9b9b96;
+  --faint: #74746f;
+  --line: #242424;
+  --line-strong: #353535;
+  --invert: #f2f2f0;
+  --invert-ink: #111111;
+  --live: #3ddc6a;
+  --pill-shadow: 0 1px 1px rgb(0 0 0 / 0.5), 0 6px 14px -4px rgb(0 0 0 / 0.6),
+    inset 0 1px 0 rgb(255 255 255 / 0.06);
+  --card-shadow: 0 1px 2px rgb(0 0 0 / 0.5), 0 18px 40px -16px rgb(0 0 0 / 0.7);
+  --lift-shadow: 0 2px 4px rgb(0 0 0 / 0.5), 0 28px 56px -18px rgb(0 0 0 / 0.8);
+  color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  :root:not([data-theme]) {
+    --bg: #0b0b0b;
+    --bg-glow: #262626;
+    --surface: #151515;
+    --surface-2: #1d1d1d;
+    --ink: #f2f2f0;
+    --ink-soft: #d0d0cc;
+    --muted: #9b9b96;
+    --faint: #74746f;
+    --line: #242424;
+    --line-strong: #353535;
+    --invert: #f2f2f0;
+    --invert-ink: #111111;
+    --live: #3ddc6a;
+    color-scheme: dark;
   }
 }
 
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-invert: var(--invert);
+  --color-invert-ink: var(--invert-ink);
+  --color-live: var(--live);
+  --shadow-pill: var(--pill-shadow);
+  --shadow-card: var(--card-shadow);
+  --shadow-lift: var(--lift-shadow);
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  caret-color: var(--ink);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.page-glow {
+  background: radial-gradient(
+    ellipse 70% 55% at 50% 0%,
+    var(--bg-glow),
+    transparent 70%
+  );
+}
+
+::selection {
+  background: var(--invert);
+  color: var(--invert-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 999px;
+}
+
+.motion-ok [data-reveal-item] {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(4px);
+}
+
+.motion-ok [data-reveal-item="scale"] {
+  transform: translateY(12px) scale(0.97);
+}
+
+.motion-ok [data-reveal-item="card"] {
+  transform: translateY(72px) scale(0.95);
+  filter: blur(6px);
+}
+
+.motion-ok [data-reveal-item][data-state="in"],
+.motion-ok [data-reveal-group][data-state="in"] [data-reveal-item] {
+  animation: reveal 0.9s var(--ease-out-expo) both;
+  animation-delay: calc(var(--delay, 0ms) + var(--i, 0) * var(--stagger, 80ms));
+}
+
+.motion-ok [data-reveal-item="card"][data-state="in"] {
+  animation-duration: 1.1s;
+}
+
+@keyframes reveal {
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes nudge {
+  0% {
+    transform: translateY(-6px);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+}
+
+/* Current-role dot: two rings ripple out from it, half a beat apart. */
+.pulsar {
+  isolation: isolate;
+}
+
+.pulsar::before,
+.pulsar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 999px;
+  background: currentColor;
+  animation: pulsar 2.4s cubic-bezier(0.2, 0.6, 0.35, 1) infinite;
+}
+
+.pulsar::after {
+  animation-delay: 1.2s;
+}
+
+@keyframes pulsar {
+  0% {
+    transform: scale(1);
+    opacity: 0.45;
+  }
+  100% {
+    transform: scale(3.6);
+    opacity: 0;
+  }
+}
+
+.nudge {
+  animation: nudge 1.8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+html.lenis {
+  scroll-behavior: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  body {
+    transition: none;
+  }
+  .nudge,
+  .pulsar::before,
+  .pulsar::after {
+    animation: none;
+  }
 }
