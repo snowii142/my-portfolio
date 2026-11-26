@@ -6,8 +6,8 @@ import { ArrowUpRight } from '@/components/ui';
 
 const links = [
   { href: '/#work', label: t.nav.work },
-  { href: '/#about', label: t.nav.about },
   { href: '/#experience', label: t.nav.experience },
+  { href: '/#about', label: t.nav.about },
   { href: '/#contact', label: t.nav.contact },
 ];
 
