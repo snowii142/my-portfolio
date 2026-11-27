@@ -165,11 +165,6 @@ export const MailIcon = (p: IconProps) => (
   </Icon>
 );
 
-export const PhoneIcon = (p: IconProps) => (
-  <Icon {...p}>
-    <path d="M5.5 2.5h-2a1 1 0 0 0-1 1.1A11 11 0 0 0 12.4 13.5a1 1 0 0 0 1.1-1v-2l-2.5-1-1.2 1.2a7 7 0 0 1-3.5-3.5L7.5 6 6.5 3.5Z" />
-  </Icon>
-);
 
 export const PinIcon = (p: IconProps) => (
   <Icon {...p}>

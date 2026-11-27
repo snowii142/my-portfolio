@@ -6,8 +6,6 @@ export const profile = {
   stackLine: ['4+ years', 'React', 'Next.js', 'TypeScript', 'NestJS', 'Go'],
   location: 'Samut Prakan, Thailand',
   email: 'pongsakorn.sornpetch@gmail.com',
-  phone: '+66 97 071 7717',
-  phoneHref: 'tel:+66970717717',
   cvPath: '/pongsakorn-sornpetch-cv.pdf',
   intro:
     'I build production web applications and the back-office systems behind them, mostly in React, Next.js and TypeScript, with backend work in NestJS and Go when a feature needs it.',

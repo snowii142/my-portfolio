@@ -5,7 +5,6 @@ import {
   Container,
   DownloadIcon,
   MailIcon,
-  PhoneIcon,
   buttonStyles,
 } from '@/components/ui';
 
@@ -36,20 +35,13 @@ export function Contact() {
               {t.contact.lead}
             </p>
           </RevealItem>
-          <RevealItem className="mt-8 flex flex-col items-center gap-3 text-sm sm:flex-row sm:gap-8">
+          <RevealItem className="mt-8 flex items-center text-sm">
             <a
               href={`mailto:${profile.email}`}
               className="flex items-center gap-2 underline decoration-line-strong underline-offset-4 transition-colors hover:decoration-ink"
             >
               <MailIcon />
               {profile.email}
-            </a>
-            <a
-              href={profile.phoneHref}
-              className="flex items-center gap-2 tabular-nums underline decoration-line-strong underline-offset-4 transition-colors hover:decoration-ink"
-            >
-              <PhoneIcon />
-              {profile.phone}
             </a>
           </RevealItem>
           <RevealItem className="mt-10 flex flex-wrap justify-center gap-3 sm:gap-4">
