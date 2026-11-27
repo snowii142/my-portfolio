@@ -1,22 +1,59 @@
+export const careerStart = { year: 2022, month: 2 }; // Forviz, February 2022
+
+export function monthsOfExperience(now = new Date()) {
+  return (
+    (now.getFullYear() - careerStart.year) * 12 +
+    (now.getMonth() + 1 - careerStart.month)
+  );
+}
+
+export function yearsOfExperience(now = new Date()) {
+  return Math.floor(monthsOfExperience(now) / 12);
+}
+
+export function formatExperience(totalMonths: number) {
+  const years = Math.floor(totalMonths / 12);
+  const months = totalMonths % 12;
+  const part = (n: number, unit: string) => `${n} ${unit}${n === 1 ? '' : 's'}`;
+  return months
+    ? `${part(years, 'year')} ${part(months, 'month')}`
+    : part(years, 'year');
+}
+
+const years = yearsOfExperience();
+const yearsInWords =
+  [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+    'ten',
+  ][years] ?? String(years);
+
 export const profile = {
   name: 'Pongsakorn Sornpetch',
   shortName: 'Pongsakorn',
   role: 'Frontend-focused Full-Stack Developer',
   roleLines: ['Frontend-focused', 'Full-Stack Developer'],
-  stackLine: ['4+ years', 'React', 'Next.js', 'TypeScript', 'NestJS', 'Go'],
+  stackLine: ['React', 'Next.js', 'TypeScript', 'NestJS', 'Go'],
   location: 'Samut Prakan, Thailand',
   email: 'pongsakorn.sornpetch@gmail.com',
   cvPath: '/pongsakorn-sornpetch-cv.pdf',
   intro:
     'I build production web applications and the back-office systems behind them, mostly in React, Next.js and TypeScript, with backend work in NestJS and Go when a feature needs it.',
   about: [
-    'For more than four years I have worked on software that operations teams rely on every day: grid-access workflows for an energy utility, pricing and approval engines for an automotive manufacturer, and the admin consoles, resident apps and gate systems that run residential projects.',
+    `For more than ${yearsInWords} years I have worked on software that operations teams rely on every day: grid-access workflows for an energy utility, pricing and approval engines for an automotive manufacturer, and the admin consoles, resident apps and gate systems that run residential projects.`,
     'Most of my time goes into the frontend: multi-step forms, data-heavy tables, dashboards, approval flows and reusable components. I am comfortable following a feature into the API and database, which is where a lot of the performance work in my projects ended up.',
   ],
   greeting: "I'm Pongsakorn.",
   headline: 'I build the business systems operations teams rely on every day.',
-  summary:
-    '4+ years shipping client systems in energy, automotive, real estate and retail. React, Next.js and TypeScript on the front, NestJS and Go when a feature needs the backend too.',
+  summary: `${years}+ years shipping client systems in energy, automotive, real estate and retail. React, Next.js and TypeScript on the front, NestJS and Go when a feature needs the backend too.`,
   availability: 'Open to frontend and full-stack roles',
   portraitPath: '/me/me.webp',
 };

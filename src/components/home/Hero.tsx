@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { profile } from '@/content/profile';
+import { monthsOfExperience, profile } from '@/content/profile';
+import { YearsOfExperience } from '@/components/YearsOfExperience';
 import { t } from '@/i18n/ui';
 import { HeroParallax, RevealGroup, RevealItem } from '@/components/motion';
 import {
@@ -41,6 +42,8 @@ export function Hero() {
           </RevealItem>
           <RevealItem>
             <p className="mt-5 text-sm text-muted italic">
+              <YearsOfExperience initial={monthsOfExperience()} />
+              {' · '}
               {profile.stackLine.join(' · ')}
             </p>
           </RevealItem>
